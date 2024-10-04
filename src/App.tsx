@@ -12,12 +12,11 @@ import {
   Text,
   Button,
   SimpleGrid,
-  Stack,
   VStack,
   HStack,
-  Code,
   Center,
   Flex,
+  Code
 } from '@chakra-ui/react';
 
 // Custom Theme for Apple-like Aesthetics
@@ -179,7 +178,7 @@ function App() {
             </Center>
 
             {/* Features Section */}
-            <section id="features">
+            <section id="features" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
               <Heading
                 as="h2"
                 size="xl"
@@ -222,7 +221,7 @@ function App() {
             </section>
 
             {/* Code Example Section */}
-            <section className="code-example" py={20}>
+            <section className="code-example" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
               <Heading
                 as="h2"
                 size="xl"
@@ -243,7 +242,7 @@ function App() {
                 >
                   <Code
                     className="language-javascript"
-                    whiteSpace="pre-wrap"
+                    whiteSpace="no-wrap"
                     display="block"
                     p={4}
                     borderRadius="md"
@@ -276,9 +275,8 @@ function App() {
             </section>
 
             {/* Benefits Section */}
-            <section id="benefits">
-              <Heading
-                as="h2"
+            <section id="benefits" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
+              <Heading 
                 size="xl"
                 textAlign="center"
                 mb={10}
@@ -321,7 +319,7 @@ function App() {
             </section>
 
             {/* How It Works Section */}
-            <section id="how-it-works" py={20}>
+            <section id="how-it-works" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
               <Heading
                 as="h2"
                 size="xl"
@@ -331,56 +329,22 @@ function App() {
               >
                 How It Works
               </Heading>
-              <Stack
-                spacing={10}
-                direction={{ base: 'column', md: 'row' }}
-                justifyContent="center"
-              >
-                {howItWorksData.map((step, index) => (
-                  <Center key={step.title}>
-                    <Box
-                      p={8}
-                      borderRadius="lg"
-                      boxShadow="base"
-                      bg="white"
-                      flex={1}
-                      transition="transform 0.3s"
-                      _hover={{
-                        transform: 'translateY(-5px)',
-                        boxShadow: 'md',
-                      }}
-                      maxW="300px"
-                    >
-                      <HStack spacing={6} align="start">
-                        <Box
-                          w={12}
-                          h={12}
-                          borderRadius="full"
-                          bg="brand.500"
-                          color="white"
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="center"
-                          fontSize="lg"
-                          fontWeight="bold"
-                        >
-                          {index + 1}
-                        </Box>
-                        <VStack align="start" spacing={1}>
-                          <Text fontWeight="bold" color="brand.700">
-                            {step.title}
-                          </Text>
-                          <Text color="gray.600">{step.description}</Text>
-                        </VStack>
-                      </HStack>
+              <Container maxW="container.lg">
+                <VStack spacing={8} align="start">
+                  {howItWorksData.map((step, index) => (
+                    <Box key={index} width="100%">
+                      <Heading as="h3" size="md" mb={4} color="brand.700">
+                        {step.title}
+                      </Heading>
+                      <Text color="gray.600">{step.description}</Text>
                     </Box>
-                  </Center>
-                ))}
-              </Stack>
+                  ))}
+                </VStack>
+              </Container>
             </section>
 
             {/* Use Cases Section */}
-            <section id="use-cases">
+            <section id="use-cases" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
               <Heading
                 as="h2"
                 size="xl"
@@ -407,26 +371,12 @@ function App() {
                         transform: 'translateY(-5px)',
                         boxShadow: 'md',
                       }}
-                      onClick={(e) => toggleDescription(e.currentTarget)}
-                      cursor="pointer"
                       maxW="300px"
                     >
-                      <HStack justify="space-between">
-                        <Text fontWeight="bold" color="brand.700">
-                          {useCase.title}
-                        </Text>
-                        <Text className="arrow" color="brand.600">
-                          ▼
-                        </Text>
-                      </HStack>
-                      <Text
-                        color="gray.600"
-                        className="description"
-                        display="none"
-                        mt={4}
-                      >
-                        {useCase.description}
-                      </Text>
+                      <Heading as="h3" size="md" mb={2} color="brand.700">
+                        {useCase.title}
+                      </Heading>
+                      <Text color="gray.600">{useCase.description}</Text>
                     </Box>
                   </Center>
                 ))}
@@ -468,48 +418,6 @@ function App() {
             </section>
           </Box>
         </main>
-
-        {/* Footer */}
-        <footer>
-          <Box bg="brand.50" py={6}>
-            <Container maxW="container.xl">
-              <VStack spacing={4} align="center">
-                <HStack spacing={8}>
-                  <Button
-                    variant="ghost"
-                    color="brand.600"
-                    _hover={{ color: 'brand.800' }}
-                    as="a"
-                    href="#"
-                  >
-                    Docs
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    color="brand.600"
-                    _hover={{ color: 'brand.800' }}
-                    as="a"
-                    href="#"
-                  >
-                    Dev Community
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    color="brand.600"
-                    _hover={{ color: 'brand.800' }}
-                    as="a"
-                    href="#"
-                  >
-                    Contact Us
-                  </Button>
-                </HStack>
-                <Text color="gray.600">
-                  &copy; 2024 Free GPT API. All rights reserved.
-                </Text>
-              </VStack>
-            </Container>
-          </Box>
-        </footer>
       </Box>
     </ChakraProvider>
   );
@@ -517,87 +425,75 @@ function App() {
 
 const featuresData = [
   {
-    icon: '/static/no-key-icon.png',
-    alt: 'No API Key Icon',
-    title: 'No API Key? No Problem!',
-    description:
-      'Easily integrate AI without the hassle of managing API keys, allowing you to focus on what matters most—building great applications.',
+    title: 'No API Keys Needed',
+    description: 'Start using the API without the hassle of API key management.',
+    icon: '/path-to-icon/no-api-keys.svg',
+    alt: 'No API Keys Needed'
   },
   {
-    icon: '/static/fast-response-icon.png',
-    alt: 'Fast Response Icon',
-    title: 'Lightning-Fast Responses',
-    description:
-      'Receive responses in just 1 to 3 seconds, ensuring a smooth and efficient development process.',
+    title: 'Free Forever',
+    description: 'Enjoy free access to the API without hidden costs or limitations.',
+    icon: '/path-to-icon/free-forever.svg',
+    alt: 'Free Forever'
   },
   {
-    icon: '/static/integration-icon.png',
-    alt: 'Integration Icon',
-    title: 'Seamless Integration',
-    description:
-      'Effortlessly incorporate our API into your projects with simple GET requests and robust documentation.',
+    title: 'Simple Integration',
+    description: 'Easily integrate the API into your applications with minimal setup.',
+    icon: '/path-to-icon/simple-integration.svg',
+    alt: 'Simple Integration'
   },
   {
-    icon: '/static/swagger-icon.png',
-    alt: 'Swagger Icon',
-    title: 'Intuitive Swagger Docs',
-    description:
-      'Explore and interact with our API using Swagger’s user-friendly interface, making development a breeze.',
-  },
+    title: 'AI-Powered',
+    description: 'Leverage the power of GPT to enhance your applications with advanced AI.',
+    icon: '/path-to-icon/ai-powered.svg',
+    alt: 'AI-Powered'
+  }
 ];
 
 const benefitsData = [
   {
-    title: 'Maximize Value:',
-    description:
-      'Leverage powerful AI tools without incurring hefty costs, ensuring you get the most out of every project.',
+    title: 'Fast Response',
+    description: 'Receive quick and accurate responses to your API requests.'
   },
   {
-    title: 'Accessible to All:',
-    description:
-      'Our API is designed for everyone, breaking down barriers and making advanced AI accessible to developers of all levels.',
+    title: 'Reliable Performance',
+    description: 'Count on the API for consistent and reliable results.'
   },
   {
-    title: 'Collaborative Community:',
-    description:
-      'Join a vibrant community of developers and innovators who are pushing the boundaries of AI technology.',
-  },
+    title: 'Scalable',
+    description: 'Easily scale your usage as your application grows.'
+  }
 ];
 
 const howItWorksData = [
   {
-    title: 'Send a GET Request:',
-    description:
-      'Simply send your query via a GET request and let our API handle the rest.',
+    title: 'Step 1: Make a Request',
+    description: 'Send a request to the GPT API using simple HTTP methods.'
   },
   {
-    title: 'Receive Instant Responses:',
-    description:
-      'Enjoy rapid responses that keep your development process moving smoothly and efficiently.',
+    title: 'Step 2: Get a Response',
+    description: 'Receive AI-generated content based on your query.'
   },
   {
-    title: 'Explore with Swagger:',
-    description:
-      'Utilize our Swagger interface to fully harness the capabilities of our API and customize your integrations.',
-  },
+    title: 'Step 3: Integrate in Your App',
+    description: 'Use the response data in your app to enhance user experience.'
+  }
 ];
 
 const useCasesData = [
   {
-    title: 'Enhance Your Chatbots',
-    description:
-      'Develop intelligent chatbots that provide exceptional user experiences and keep your customers engaged.',
+    title: 'Chatbots',
+    description: 'Use the API to power smart and interactive chatbots.'
   },
   {
-    title: 'Streamline Content Creation',
-    description:
-      'Automate the generation of articles, blogs, and marketing content effortlessly, saving you time and resources.',
+    title: 'Content Generation',
+    description: 'Generate high-quality content for blogs, social media, and more.'
   },
   {
-    title: 'Upgrade Educational Tools',
-    description:
-      'Build interactive learning applications that offer real-time assistance and personalized learning experiences.',
-  },
+    title: 'Customer Support',
+    description: 'Automate customer support with intelligent responses.'
+  }
 ];
+
 
 export default App;
