@@ -18,6 +18,18 @@ import {
   Flex,
   Code
 } from '@chakra-ui/react';
+import { 
+  Stepper,
+  Step,
+  StepIndicator,
+  StepStatus,
+  StepSeparator,
+  StepTitle,
+  StepDescription,
+  useColorModeValue
+} from '@chakra-ui/react';
+
+const activeStep = 1; // Example: Set the currently active step (index starts from 0)
 
 // Custom Theme for Apple-like Aesthetics
 const theme = extendTheme({
@@ -320,28 +332,36 @@ function App() {
 
             {/* How It Works Section */}
             <section id="how-it-works" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
-              <Heading
-                as="h2"
-                size="xl"
-                textAlign="center"
-                mb={10}
-                color="brand.900"
-              >
-                How It Works
-              </Heading>
-              <Container maxW="container.lg">
-                <VStack spacing={8} align="start">
-                  {howItWorksData.map((step, index) => (
-                    <Box key={index} width="100%">
-                      <Heading as="h3" size="md" mb={4} color="brand.700">
-                        {step.title}
-                      </Heading>
-                      <Text color="gray.600">{step.description}</Text>
-                    </Box>
-                  ))}
-                </VStack>
-              </Container>
-            </section>
+      <Heading
+        as="h2"
+        size="xl"
+        textAlign="center"
+        mb={10}
+        color={useColorModeValue('brand.900', 'gray.100')} // Adjust color for dark mode
+      >
+        How It Works
+      </Heading>
+      <Container maxW="container.lg">
+        <Stepper index={activeStep} orientation="vertical">
+          {howItWorksData.map((step, index) => (
+            <Step key={index}>
+              <StepIndicator>
+                <StepStatus
+                  complete={<StepStatus completeBg={useColorModeValue('brand.500', 'brand.200')} />} // Adjust colors for dark mode
+                  active={<StepStatus activeBg={useColorModeValue('brand.600', 'brand.300')} />} // Adjust colors for dark mode
+                  incomplete={<StepStatus incompleteBg={useColorModeValue('gray.200', 'gray.600')} />} // Adjust colors for dark mode
+                />
+              </StepIndicator>
+              <Box ml={5}>
+                <StepTitle color={useColorModeValue('brand.700', 'gray.100')}>{step.title}</StepTitle> {/* Adjust color for dark mode */}
+                <StepDescription color={useColorModeValue('gray.600', 'gray.400')}>{step.description}</StepDescription> {/* Adjust color for dark mode */}
+              </Box>
+              <StepSeparator borderColor={useColorModeValue('gray.200', 'gray.700')} /> {/* Adjust color for dark mode */}
+            </Step>
+          ))}
+        </Stepper>
+      </Container>
+    </section>
 
             {/* Use Cases Section */}
             <section id="use-cases" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
