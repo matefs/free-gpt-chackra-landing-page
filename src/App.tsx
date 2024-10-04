@@ -253,7 +253,7 @@ function App() {
                   maxW="800px"
                 >
                   <Code
-                    className="language-javascript"
+                    className="language-javascript preserve-line-breaks"
                     whiteSpace="no-wrap"
                     display="block"
                     p={4}

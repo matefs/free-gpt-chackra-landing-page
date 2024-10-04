@@ -179,3 +179,9 @@ code[class*='language-css'] {
     rgba(221, 222, 241, 0)
   );
 }
+
+
+.preserve-line-breaks {
+  white-space: pre-wrap !important; 
+  border: none !important;
+}
